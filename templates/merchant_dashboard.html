@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Merchant Dashboard - VulnBank</title>
+    <title>가맹점 대시보드 - VulnBank</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon-16.svg') }}" sizes="16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -13,14 +13,14 @@
     <script src="{{ url_for('static', filename='vuln-disclaimer.js') }}" defer></script>
 </head>
 <body class="merchant-dashboard-page">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
 
-    <button class="menu-toggle" onclick="toggleMerchantSidebar()" aria-label="Toggle navigation menu">
+    <button class="menu-toggle" onclick="toggleMerchantSidebar()" aria-label="탐색 메뉴 전환">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
     </button>
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMerchantSidebar()"></div>
 
-    <aside class="sidebar" id="merchantSidebar" role="navigation" aria-label="Merchant navigation">
+    <aside class="sidebar" id="merchantSidebar" role="navigation" aria-label="가맹점 탐색">
         <div class="sidebar-logo">
             <div class="sidebar-logo-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg>
@@ -28,44 +28,44 @@
             <span class="sidebar-logo-text">VulnBank Merchant</span>
         </div>
         <nav class="sidebar-nav">
-            <div class="nav-section-label">Merchant</div>
+            <div class="nav-section-label">가맹점</div>
             <a href="#overview" class="nav-link active" onclick="setMerchantActiveLink(this)">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
-                Overview
+                개요
             </a>
             <a href="#charge" class="nav-link" onclick="setMerchantActiveLink(this)">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
-                Test Charge
+                테스트 결제
             </a>
             <a href="#payments" class="nav-link" onclick="setMerchantActiveLink(this)">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
-                Payments
+                결제 내역
             </a>
             <a href="#integration" class="nav-link" onclick="setMerchantActiveLink(this)">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11 4"></path><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L13 20"></path></svg>
-                Integration
+                연동
             </a>
             <a href="#credentials" class="nav-link" onclick="setMerchantActiveLink(this)">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2 11 12"></path><path d="M21 2l-6 18-4-8-8-4 18-6z"></path></svg>
-                Credentials
+                인증 정보
             </a>
-            <div class="nav-section-label">Links</div>
+            <div class="nav-section-label">링크</div>
             <a href="/api/docs" class="nav-link">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></svg>
-                API Docs
+                API 문서
             </a>
             <a href="/dashboard" class="nav-link">
                 <svg class="nav-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"></path><path d="M3 6h18"></path><path d="M3 18h18"></path></svg>
-                Personal App
+                개인 뱅킹 앱
             </a>
         </nav>
         <div class="sidebar-footer">
             <div class="merchant-avatar" aria-hidden="true">M</div>
             <div class="sidebar-user-info">
-                <div class="sidebar-user-name" id="merchantSidebarName">Merchant</div>
-                <div class="sidebar-user-role">Payment Account</div>
+                <div class="sidebar-user-name" id="merchantSidebarName">가맹점</div>
+                <div class="sidebar-user-role">결제 계정</div>
             </div>
-            <button class="sidebar-logout" onclick="merchantLogout()" aria-label="Sign out">
+            <button class="sidebar-logout" onclick="merchantLogout()" aria-label="로그아웃">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
             </button>
         </div>
@@ -73,16 +73,16 @@
 
     <header class="topbar">
         <div class="topbar-left">
-            <span class="topbar-greeting" id="merchantGreeting">Merchant Console</span>
+            <span class="topbar-greeting" id="merchantGreeting">가맹점 콘솔</span>
             <span class="topbar-date" id="current-date"></span>
         </div>
         <div class="topbar-right">
-            <button class="theme-toggle" onclick="toggleMerchantTheme()" aria-label="Toggle dark mode">
+            <button class="theme-toggle" onclick="toggleMerchantTheme()" aria-label="다크 모드 전환">
                 <span class="toggle-icon toggle-icon-sun">☀</span>
                 <span class="toggle-slider"></span>
                 <span class="toggle-icon toggle-icon-moon">☾</span>
             </button>
-            <button class="topbar-icon-btn" onclick="fetchMerchantPayments()" aria-label="Refresh payments">
+            <button class="topbar-icon-btn" onclick="fetchMerchantPayments()" aria-label="결제 내역 새로고침">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M16 8h5V3"></path></svg>
             </button>
         </div>
@@ -93,39 +93,39 @@
 
         <section class="merchant-stats reveal" id="overview">
             <div class="merchant-stat-card stat-approved">
-                <div class="merchant-stat-label">Completed Volume</div>
+                <div class="merchant-stat-label">완료된 결제액</div>
                 <div class="merchant-stat-value" id="completedVolume">$0.00</div>
             </div>
             <div class="merchant-stat-card stat-count">
-                <div class="merchant-stat-label">Payments</div>
+                <div class="merchant-stat-label">결제 건수</div>
                 <div class="merchant-stat-value" id="paymentCount">0</div>
             </div>
             <div class="merchant-stat-card stat-failed">
-                <div class="merchant-stat-label">Failed</div>
+                <div class="merchant-stat-label">실패</div>
                 <div class="merchant-stat-value" id="failedCount">0</div>
             </div>
             <div class="merchant-stat-card stat-auth">
-                <div class="merchant-stat-label">Auth Method</div>
+                <div class="merchant-stat-label">인증 방식</div>
                 <div class="merchant-stat-value compact" id="authMethod">API</div>
             </div>
         </section>
 
         <section class="dashboard-section reveal" id="charge">
             <div class="section-header">
-                <h2 class="section-title">Test Charge</h2>
-                <span class="merchant-badge">Sandbox</span>
+                <h2 class="section-title">테스트 결제</h2>
+                <span class="merchant-badge">샌드박스</span>
             </div>
             <form id="merchantChargeForm" class="merchant-form-grid">
                 <div class="form-group">
-                    <label for="chargeAmount">Amount</label>
+                    <label for="chargeAmount">금액</label>
                     <input type="number" id="chargeAmount" name="amount" step="0.01" placeholder="0.00" required>
                 </div>
                 <div class="form-group">
-                    <label for="chargeCurrency">Currency</label>
+                    <label for="chargeCurrency">통화</label>
                     <input type="text" id="chargeCurrency" name="currency" value="USD" required>
                 </div>
                 <div class="form-group wide">
-                    <label for="chargeCardNumber">Card Number</label>
+                    <label for="chargeCardNumber">카드 번호</label>
                     <input type="text" id="chargeCardNumber" name="card_number" inputmode="numeric" autocomplete="cc-number" maxlength="16" pattern="[0-9]{16}" placeholder="4111111111111111" required>
                 </div>
                 <div class="form-group">
@@ -133,43 +133,43 @@
                     <input type="text" id="chargeCvv" name="cvv" inputmode="numeric" autocomplete="cc-csc" maxlength="3" pattern="[0-9]{3}" placeholder="123" required>
                 </div>
                 <div class="form-group">
-                    <label for="chargeExpiry">Expiry</label>
+                    <label for="chargeExpiry">유효기간</label>
                     <input type="text" id="chargeExpiry" name="expiry_date" inputmode="numeric" autocomplete="cc-exp" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" placeholder="12/28" required>
                 </div>
                 <div class="form-group">
-                    <label for="merchantOrderId">Order ID</label>
+                    <label for="merchantOrderId">주문 ID</label>
                     <input type="text" id="merchantOrderId" name="merchant_order_id" placeholder="ORDER-1001">
                 </div>
                 <div class="form-group wide">
-                    <label for="chargeDescription">Description</label>
-                    <input type="text" id="chargeDescription" name="description" placeholder="Demo ecommerce checkout">
+                    <label for="chargeDescription">설명</label>
+                    <input type="text" id="chargeDescription" name="description" placeholder="데모 이커머스 결제">
                 </div>
                 <div class="merchant-form-actions">
-                    <button type="submit">Charge Card</button>
+                    <button type="submit">카드 결제</button>
                 </div>
             </form>
         </section>
 
         <section class="dashboard-section reveal" id="payments">
             <div class="section-header">
-                <h2 class="section-title">Payments</h2>
-                <button type="button" class="btn-secondary btn-sm" onclick="fetchMerchantPayments()">Refresh</button>
+                <h2 class="section-title">결제 내역</h2>
+                <button type="button" class="btn-secondary btn-sm" onclick="fetchMerchantPayments()">새로고침</button>
             </div>
             <div class="merchant-table-wrap">
                 <table class="merchant-table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Merchant</th>
-                            <th>Order</th>
-                            <th>Card</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Created</th>
+                            <th>가맹점</th>
+                            <th>주문</th>
+                            <th>카드</th>
+                            <th>금액</th>
+                            <th>상태</th>
+                            <th>생성일</th>
                         </tr>
                     </thead>
                     <tbody id="merchantPaymentsBody">
-                        <tr><td colspan="7" class="empty-table">Loading payments...</td></tr>
+                        <tr><td colspan="7" class="empty-table">결제 내역을 불러오는 중...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -177,13 +177,13 @@
 
         <section class="dashboard-section reveal" id="integration">
             <div class="section-header">
-                <h2 class="section-title">Integration</h2>
+                <h2 class="section-title">연동</h2>
                 <span class="merchant-badge">Checkout API</span>
             </div>
             <div class="integration-grid">
                 <div class="integration-panel">
-                    <h3>Connect your app</h3>
-                    <p>Use the charge endpoint from your ecommerce checkout after collecting VulnBank virtual card details from the customer.</p>
+                    <h3>앱 연결하기</h3>
+                    <p>고객에게서 VulnBank 가상 카드 정보를 받은 뒤, 이커머스 결제 단계에서 charge 엔드포인트를 호출하세요.</p>
                     <div class="endpoint-list">
                         <div class="endpoint-row">
                             <span class="method post">POST</span>
@@ -200,59 +200,59 @@
                     </div>
                 </div>
                 <div class="integration-panel">
-                    <h3>Authentication</h3>
-                    <p>Send either your API key header or your merchant JWT with each payment request.</p>
+                    <h3>인증</h3>
+                    <p>각 결제 요청마다 API 키 헤더 또는 가맹점 JWT 중 하나를 함께 보내세요.</p>
                     <div class="credential-line integration-copy-line">
                         <code id="integrationApiKeyHeader">X-Merchant-Api-Key: -</code>
-                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('integrationApiKeyHeader')" aria-label="Copy API key header">
+                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('integrationApiKeyHeader')" aria-label="API 키 헤더 복사">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
                     </div>
                     <div class="credential-line integration-copy-line">
                         <code id="integrationBearerHeader">Authorization: Bearer -</code>
-                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('integrationBearerHeader')" aria-label="Copy bearer header">
+                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('integrationBearerHeader')" aria-label="Bearer 헤더 복사">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
                     </div>
                 </div>
                 <div class="integration-panel wide">
                     <div class="integration-code-header">
-                        <h3>Checkout request</h3>
-                        <button type="button" class="btn-secondary btn-sm" onclick="copyMerchantCredential('integrationFetchExample')">Copy</button>
+                        <h3>결제 요청 예시</h3>
+                        <button type="button" class="btn-secondary btn-sm" onclick="copyMerchantCredential('integrationFetchExample')">복사</button>
                     </div>
-                    <pre class="integration-code"><code id="integrationFetchExample">Loading example...</code></pre>
+                    <pre class="integration-code"><code id="integrationFetchExample">예시를 불러오는 중...</code></pre>
                 </div>
             </div>
         </section>
 
         <section class="dashboard-section reveal" id="credentials">
             <div class="section-header">
-                <h2 class="section-title">Credentials</h2>
-                <span class="merchant-badge">API Access</span>
+                <h2 class="section-title">인증 정보</h2>
+                <span class="merchant-badge">API 접근</span>
             </div>
             <div class="credential-grid">
                 <div class="credential-block">
-                    <label>Merchant ID</label>
+                    <label>가맹점 ID</label>
                     <div class="credential-value" id="merchantIdValue">-</div>
                 </div>
                 <div class="credential-block">
-                    <label>Email</label>
+                    <label>이메일</label>
                     <div class="credential-value" id="merchantEmailValue">-</div>
                 </div>
                 <div class="credential-block wide">
-                    <label>API Key</label>
+                    <label>API 키</label>
                     <div class="credential-line">
                         <code id="merchantApiKeyValue">-</code>
-                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('merchantApiKeyValue')" aria-label="Copy API key">
+                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('merchantApiKeyValue')" aria-label="API 키 복사">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
                     </div>
                 </div>
                 <div class="credential-block wide">
-                    <label>Merchant JWT</label>
+                    <label>가맹점 JWT</label>
                     <div class="credential-line">
                         <code id="merchantTokenValue">-</code>
-                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('merchantTokenValue')" aria-label="Copy JWT">
+                        <button type="button" class="icon-copy-btn" onclick="copyMerchantCredential('merchantTokenValue')" aria-label="JWT 복사">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
                     </div>

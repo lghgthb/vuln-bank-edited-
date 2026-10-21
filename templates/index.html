@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>VulnBank - The Modern Banking Platform</title>
+    <title>VulnBank - 모던 뱅킹 플랫폼</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon-16.svg') }}" sizes="16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -477,7 +477,7 @@
     </style>
 </head>
 <body>
-    <a href="#hero" class="skip-link">Skip to main content</a>
+    <a href="#hero" class="skip-link">본문으로 건너뛰기</a>
 
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
@@ -486,22 +486,22 @@
             <span class="navbar-logo-text">VulnBank</span>
         </div>
         <div class="navbar-links">
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="{{ url_for('merchant_login_page') }}">Merchant Portal</a>
+            <a href="#features">기능</a>
+            <a href="#how-it-works">이용 방법</a>
+            <a href="{{ url_for('merchant_login_page') }}">가맹점 포털</a>
             <a href="https://github.com/Commando-X/vuln-bank" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12A11.5 11.5 0 0 0 8.36 22.9c.58.1.79-.25.79-.56v-2.15c-3.18.69-3.85-1.35-3.85-1.35-.52-1.3-1.26-1.65-1.26-1.65-1.03-.7.08-.69.08-.69 1.13.08 1.73 1.17 1.73 1.17 1.02 1.72 2.67 1.22 3.32.93.1-.74.4-1.22.72-1.5-2.54-.29-5.2-1.27-5.2-5.64 0-1.25.45-2.27 1.17-3.07-.12-.29-.5-1.46.11-3.04 0 0 .96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0c2.18-1.48 3.13-1.17 3.13-1.17.62 1.58.24 2.75.12 3.04.73.8 1.17 1.82 1.17 3.07 0 4.38-2.67 5.35-5.22 5.63.41.35.78 1.04.78 2.11v3.12c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-                <span>Star on Github</span>
+                <span>GitHub에서 Star 누르기</span>
             </a>
         </div>
         <div class="navbar-actions">
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="다크 모드 전환">
                 <span class="toggle-icon toggle-icon-sun">☀️</span>
                 <span class="toggle-slider"></span>
                 <span class="toggle-icon toggle-icon-moon">🌙</span>
             </button>
-            <a href="{{ url_for('login') }}" class="btn btn-ghost" style="font-weight:600;font-size:0.875rem;">Sign In</a>
-            <a href="{{ url_for('register') }}" class="btn btn-accent" style="font-size:0.875rem;padding:0.5rem 1.25rem;">Open Account</a>
+            <a href="{{ url_for('login') }}" class="btn btn-ghost" style="font-weight:600;font-size:0.875rem;">로그인</a>
+            <a href="{{ url_for('register') }}" class="btn btn-accent" style="font-size:0.875rem;padding:0.5rem 1.25rem;">계좌 개설</a>
         </div>
     </nav>
 
@@ -512,8 +512,8 @@
             <h1>간편하고<br><span class="accent">불안전한</span> 뱅킹</h1>
             <p class="hero-desc">이 애플리케이션은 의도적으로 취약하게 만들어졌습니다. 애플리케이션 보안 테스트를 연습하고 가르치기 위해, 그리고 보안 전문가와 보안 도구 기업이 기존 SAST/DAST 도구와 공격형 보안 AI 에이전트를 벤치마킹할 수 있도록 돕기 위해 만들어졌습니다.</p>
             <div class="hero-buttons">
-                <a href="{{ url_for('register') }}" class="btn btn-accent btn-lg">Register</a>
-                <a href="{{ url_for('login') }}" class="btn btn-secondary btn-lg">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-accent btn-lg">회원가입</a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary btn-lg">로그인</a>
             </div>
         </div>
         <div class="hero-visual lr" style="transition-delay:0.2s;">
@@ -584,7 +584,7 @@
                 <h2>내 손안의 은행</h2>
                 <p>최첨단 취약 안드로이드 앱으로 모바일 뱅킹의 미래를 경험하세요</p>
                 <p class="mobile-app-desc">이동 중에도 필요한 모든 은행 업무를 처리하세요. 몇 번의 탭만으로 송금하고, 공과금을 내고, 자산을 관리할 수 있습니다. 보안과 편의성을 새롭게 정의합니다.</p>
-                <a href="#" class="btn btn-accent btn-lg">Download</a>
+                <a href="#" class="btn btn-accent btn-lg">다운로드</a>
             </div>
         </div>
     </section>
@@ -649,7 +649,7 @@
                 <div class="section-badge">모바일 앱</div>
                 <h2>내 손안의 은행</h2>
                 <p>최첨단 취약 안드로이드 앱으로 모바일 뱅킹의 미래를 경험하세요. 이동 중에도 필요한 모든 은행 업무를 처리하세요. 몇 번의 탭만으로 송금하고, 공과금을 내고, 자산을 관리할 수 있습니다. 보안과 편의성을 새롭게 정의합니다.</p>
-                <a href="https://github.com/Commando-X/vuln-bank-mobile" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-lg">Download App</a>
+                <a href="https://github.com/Commando-X/vuln-bank-mobile" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-lg">앱 다운로드</a>
             </div>
             <div class="mobile-visual lr" style="transition-delay:0.2s;">
                 <div class="phone-mockup">
@@ -680,7 +680,7 @@
         <div class="cta-inner lr">
             <h2>내 돈, 직접 관리할 준비가 되셨나요?</h2>
             <p>이미 더 똑똑하게 돈을 관리하고 있는 수천 명과 함께하세요.</p>
-            <a href="{{ url_for('register') }}" class="btn btn-accent">Open a Free Account &rarr;</a>
+            <a href="{{ url_for('register') }}" class="btn btn-accent">무료 계좌 개설하기 &rarr;</a>
         </div>
     </section>
 
@@ -694,9 +694,9 @@
                 </div>
                 <p class="footer-brand-text">현대 세계를 위한 현대적인 뱅킹. 자신 있게 돈을 관리하세요.</p>
             </div>
-            <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#">Pricing</a><a href="/api/docs/" target="_blank">API Docs</a></div>
-            <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="{{ url_for('careers') }}">Careers</a><a href="{{ url_for('blog') }}">Blog</a></div>
-            <div class="footer-col"><h4>Legal</h4><a href="{{ url_for('privacy') }}">Privacy Policy</a><a href="{{ url_for('terms') }}">Terms of Service</a><a href="{{ url_for('compliance') }}">Compliance</a></div>
+            <div class="footer-col"><h4>제품</h4><a href="#features">기능</a><a href="#">요금제</a><a href="/api/docs/" target="_blank">API 문서</a></div>
+            <div class="footer-col"><h4>회사</h4><a href="#">회사 소개</a><a href="{{ url_for('careers') }}">채용</a><a href="{{ url_for('blog') }}">블로그</a></div>
+            <div class="footer-col"><h4>법적 고지</h4><a href="{{ url_for('privacy') }}">개인정보처리방침</a><a href="{{ url_for('terms') }}">이용약관</a><a href="{{ url_for('compliance') }}">컴플라이언스</a></div>
         </div>
         <div class="footer-bottom">
             <div style="display:flex;flex-direction:column;gap:0.5rem;">
@@ -719,10 +719,10 @@
     </footer>
 
     <div id="landingChatWidget" class="chat-widget">
-        <button id="landingChatToggle" class="chat-toggle" onclick="toggleLandingChat()" aria-label="Open support chat">
+        <button id="landingChatToggle" class="chat-toggle" onclick="toggleLandingChat()" aria-label="고객지원 채팅 열기">
             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"/></svg>
             <span id="landingChatBadge" class="chat-badge">1</span>
-            <span class="chat-tooltip">Try AI Support</span>
+            <span class="chat-tooltip">AI 상담 체험하기</span>
         </button>
         <div id="landingChatWindow" class="chat-window" style="display:none;">
             <div class="chat-header">
@@ -731,35 +731,35 @@
                         <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"/></svg>
                     </div>
                     <div class="agent-details">
-                        <div class="agent-name">AI Support</div>
-                        <div class="agent-status">Anonymous Demo</div>
+                        <div class="agent-name">AI 상담원</div>
+                        <div class="agent-status">익명 데모</div>
                     </div>
                 </div>
-                <button class="chat-close" onclick="toggleLandingChat()" aria-label="Close chat">
+                <button class="chat-close" onclick="toggleLandingChat()" aria-label="채팅 닫기">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                 </button>
             </div>
-            <div class="chat-mode-label">Anonymous mode for landing page visitors</div>
+            <div class="chat-mode-label">랜딩 페이지 방문자용 익명 모드</div>
             <div id="landingChatMessages" class="chat-messages">
                 <div class="message bot-message">
                     <div class="message-avatar">
                         <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"/></svg>
                     </div>
                     <div class="message-content">
-                        <div class="message-text">Hi! I&apos;m the AI banking assistant. You can test the chatbot here in anonymous mode before signing in.</div>
+                        <div class="message-text">안녕하세요! 저는 AI 뱅킹 도우미입니다. 로그인하기 전에 이곳에서 익명 모드로 챗봇을 체험해 보세요.</div>
                         <div class="message-time" id="landingInitialTime"></div>
                     </div>
                 </div>
             </div>
             <div class="chat-input">
                 <div class="input-container">
-                    <input type="text" id="landingChatMessageInput" placeholder="Ask the AI assistant anything..." autocomplete="off">
-                    <button id="landingSendChatBtn" onclick="sendLandingChatMessage()" aria-label="Send message">
+                    <input type="text" id="landingChatMessageInput" placeholder="AI 도우미에게 무엇이든 물어보세요..." autocomplete="off">
+                    <button id="landingSendChatBtn" onclick="sendLandingChatMessage()" aria-label="메시지 보내기">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 20.85 12.92c.81-.35.81-1.49 0-1.84L3.4 3.6c-.66-.29-1.39.2-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.49-.87.99l.01 4.61c0 .71.73 1.2 1.39.91Z"/></svg>
                     </button>
                 </div>
                 <div id="landingTypingIndicator" class="typing-indicator" style="display:none;">
-                    <span>AI Support is typing</span>
+                    <span>AI 상담원이 입력 중입니다</span>
                     <div class="typing-dots"><span></span><span></span><span></span></div>
                 </div>
             </div>
@@ -851,9 +851,9 @@
                 });
                 const data = await response.json();
 
-                let reply = 'Sorry, I could not process your request.';
+                let reply = '죄송합니다. 요청을 처리하지 못했습니다.';
                 if (response.status === 429) {
-                    reply = data.message || 'Anonymous chat rate limit reached. Please try again later.';
+                    reply = data.message || '익명 채팅 요청 한도에 도달했습니다. 잠시 후 다시 시도해 주세요.';
                 } else if (data.status === 'success') {
                     reply = data.ai_response.response || reply;
                 } else if (data.message) {
@@ -862,7 +862,7 @@
 
                 addLandingChatMessage(reply, false);
             } catch (error) {
-                addLandingChatMessage('I am currently unable to connect. Please try again shortly.', false);
+                addLandingChatMessage('현재 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.', false);
             } finally {
                 typingIndicator.style.display = 'none';
                 sendBtn.disabled = false;

@@ -165,7 +165,7 @@ def ai_rate_limit(f):
                     if not user_allowed:
                         return jsonify({
                             'status': 'error',
-                            'message': f'Rate limit exceeded for user. You have made {user_count} requests in the last 3 hours. Limit is {user_limit} requests per 3 hours.',
+                            'message': f'사용자 요청 한도를 초과했습니다. 최근 3시간 동안 {user_count}회 요청했습니다. 한도는 3시간당 {user_limit}회입니다.',
                             'rate_limit_info': {
                                 'limit_type': 'authenticated_user',
                                 'current_count': user_count,
@@ -180,7 +180,7 @@ def ai_rate_limit(f):
                     if not ip_allowed:
                         return jsonify({
                             'status': 'error',
-                            'message': f'Rate limit exceeded for IP address. This IP has made {ip_count} requests in the last 3 hours. Limit is {ip_limit} requests per 3 hours.',
+                            'message': f'IP 주소 요청 한도를 초과했습니다. 이 IP에서 최근 3시간 동안 {ip_count}회 요청했습니다. 한도는 3시간당 {ip_limit}회입니다.',
                             'rate_limit_info': {
                                 'limit_type': 'authenticated_ip',
                                 'current_count': ip_count,
@@ -202,7 +202,7 @@ def ai_rate_limit(f):
         if not ip_allowed:
             return jsonify({
                 'status': 'error',
-                'message': f'Rate limit exceeded. This IP address has made {ip_count} requests in the last 3 hours. Limit is {ip_limit} requests per 3 hours for unauthenticated users.',
+                'message': f'요청 한도를 초과했습니다. 이 IP 주소에서 최근 3시간 동안 {ip_count}회 요청했습니다. 비로그인 사용자의 한도는 3시간당 {ip_limit}회입니다.',
                 'rate_limit_info': {
                     'limit_type': 'unauthenticated_ip',
                     'current_count': ip_count,
@@ -247,7 +247,7 @@ def health_check():
 @app.route('/graphql', methods=['GET'])
 def graphql_info():
     return jsonify({
-        'message': 'Send authenticated POST requests to /graphql to query transaction analytics.',
+        'message': '거래 분석을 조회하려면 인증된 POST 요청을 /graphql로 보내세요.',
         'introspection': 'enabled',
         'examples': [
             'graphql/transaction-summary.graphql',
@@ -266,7 +266,7 @@ def graphql_endpoint(current_user):
     if not query:
         return jsonify({
             'errors': [{
-                'message': 'A GraphQL query is required.'
+                'message': 'GraphQL 쿼리가 필요합니다.'
             }]
         }), 400
 
@@ -343,7 +343,7 @@ def register():
             if existing_user and existing_user[0]:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Username already exists',
+                    'message': '이미 존재하는 사용자 이름입니다',
                     'username': user_data.get('username'),
                     'tried_at': str(datetime.now())  # Information disclosure
                 }), 400
@@ -376,7 +376,7 @@ def register():
             # Excessive Data Exposure in Response
             sensitive_data = {
                 'status': 'success',
-                'message': 'Registration successful! Proceed to login',
+                'message': '회원가입이 완료되었습니다! 로그인해 주세요',
                 'debug_data': {  # Sensitive data exposed
                     'user_id': user[0],
                     'username': user[1],
@@ -400,7 +400,7 @@ def register():
             print(f"Registration error: {str(e)}")
             return jsonify({
                 'status': 'error',
-                'message': 'Registration failed',
+                'message': '회원가입에 실패했습니다',
                 'error': str(e)
             }), 500
         
@@ -413,7 +413,7 @@ def login():
             data = request.get_json()
             username = data.get('username')
             password = data.get('password')
-            suspension_message = 'Your account has been suspended, contact support or walk in to any of our branch to resolve the issue'
+            suspension_message = '계정이 정지되었습니다. 문제를 해결하려면 고객센터에 문의하시거나 가까운 지점을 방문해 주세요'
             
             print(f"Login attempt - Username: {username}")  # Debug print
             
@@ -440,7 +440,7 @@ def login():
                 
                 response = make_response(jsonify({
                     'status': 'success',
-                    'message': 'Login successful',
+                    'message': '로그인에 성공했습니다',
                     'token': token,
                     'accountNumber': user[3],
                     'isAdmin':       user[5],
@@ -459,7 +459,7 @@ def login():
             # Vulnerability: Username enumeration
             return jsonify({
                 'status': 'error',
-                'message': 'Invalid credentials',
+                'message': '아이디 또는 비밀번호가 올바르지 않습니다',
                 'debug_info': {  # Vulnerability: Information disclosure
                     'attempted_username': username,
                     'time': str(datetime.now())
@@ -470,7 +470,7 @@ def login():
             print(f"Login error: {str(e)}")
             return jsonify({
                 'status': 'error',
-                'message': 'Login failed',
+                'message': '로그인에 실패했습니다',
                 'error': str(e)
             }), 500
         
@@ -542,7 +542,7 @@ def check_balance(account_number):
             })
         return jsonify({
             'status': 'error',
-            'message': 'Account not found'
+            'message': '계좌를 찾을 수 없습니다'
         }), 404
     except Exception as e:
         return jsonify({
@@ -596,7 +596,7 @@ def transfer(current_user):
                 
                 return jsonify({
                     'status': 'success',
-                    'message': 'Transfer Completed',
+                    'message': '송금이 완료되었습니다',
                     'new_balance': balance - amount
                 })
                 
@@ -608,7 +608,7 @@ def transfer(current_user):
         else:
             return jsonify({
                 'status': 'error',
-                'message': 'Insufficient funds'
+                'message': '잔액이 부족합니다'
             }), 400
             
     except Exception as e:
@@ -670,12 +670,12 @@ def get_transaction_history(account_number):
 @token_required
 def upload_profile_picture(current_user):
     if 'profile_picture' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
+        return jsonify({'error': '파일이 첨부되지 않았습니다'}), 400
         
     file = request.files['profile_picture']
     
     if file.filename == '':
-        return jsonify({'error': 'No file selected'}), 400
+        return jsonify({'error': '선택된 파일이 없습니다'}), 400
         
     try:
         # Vulnerability: No file type validation
@@ -701,7 +701,7 @@ def upload_profile_picture(current_user):
         
         return jsonify({
             'status': 'success',
-            'message': 'Profile picture uploaded successfully',
+            'message': '프로필 사진이 업로드되었습니다',
             'file_path': os.path.join('static/uploads', filename)  # Vulnerability: Path disclosure
         })
         
@@ -723,7 +723,7 @@ def upload_profile_picture_url(current_user):
         image_url = data.get('image_url')
 
         if not image_url:
-            return jsonify({'status': 'error', 'message': 'image_url is required'}), 400
+            return jsonify({'status': 'error', 'message': 'image_url 값이 필요합니다'}), 400
 
         # Vulnerabilities:
         # - No URL scheme/host allowlist (SSRF)
@@ -732,7 +732,7 @@ def upload_profile_picture_url(current_user):
         # - No content-type or size validation
         resp = requests.get(image_url, timeout=10, allow_redirects=True, verify=False)
         if resp.status_code >= 400:
-            return jsonify({'status': 'error', 'message': f'Failed to fetch URL: HTTP {resp.status_code}'}), 400
+            return jsonify({'status': 'error', 'message': f'URL을 가져오지 못했습니다: HTTP {resp.status_code}'}), 400
 
         # Derive filename from URL path (user-controlled)
         parsed = urlparse(image_url)
@@ -754,7 +754,7 @@ def upload_profile_picture_url(current_user):
 
         return jsonify({
             'status': 'success',
-            'message': 'Profile picture imported from URL',
+            'message': 'URL에서 프로필 사진을 가져왔습니다',
             'file_path': os.path.join('static/uploads', filename),
             'debug_info': {  # Information disclosure for learning
                 'fetched_url': image_url,
@@ -786,7 +786,7 @@ def update_bio(current_user):
 
         return jsonify({
             'status': 'success',
-            'message': 'Bio updated successfully',
+            'message': '소개가 수정되었습니다',
             'bio': bio  # Echo back the unsanitized input
         })
     except Exception as e:
@@ -818,7 +818,7 @@ def _is_loopback_request():
 def internal_secret():
     # Soft internal check: allow only loopback requests
     if not _is_loopback_request():
-        return jsonify({'error': 'Internal resource. Loopback only.'}), 403
+        return jsonify({'error': '내부 리소스입니다. 루프백에서만 접근할 수 있습니다.'}), 403
 
     demo_env = {k: os.getenv(k) for k in [
         'DB_NAME','DB_USER','DB_PASSWORD','DB_HOST','DB_PORT','DEEPSEEK_API_KEY'
@@ -844,7 +844,7 @@ def internal_secret():
 @app.route('/internal/config.json', methods=['GET'])
 def internal_config():
     if not _is_loopback_request():
-        return jsonify({'error': 'Internal resource. Loopback only.'}), 403
+        return jsonify({'error': '내부 리소스입니다. 루프백에서만 접근할 수 있습니다.'}), 403
 
     cfg = {
         'app': {
@@ -929,7 +929,7 @@ def metadata_iam_list():
 @app.route('/latest/meta-data/iam/security-credentials/vulnbank-role', methods=['GET'])
 def metadata_iam_role():
     if not _is_loopback_request():
-        return jsonify({'error': 'Forbidden'}), 403
+        return jsonify({'error': '접근이 금지되었습니다'}), 403
     creds = {
         'Code': 'Success',
         'LastUpdated': datetime.now().isoformat(),
@@ -964,7 +964,7 @@ def request_loan(current_user):
         
         return jsonify({
             'status': 'success',
-            'message': 'Loan requested successfully'
+            'message': '대출 신청이 접수되었습니다'
         })
         
     except Exception as e:
@@ -979,7 +979,7 @@ def request_loan(current_user):
 @token_required
 def admin_panel(current_user):
     if not current_user['is_admin']:
-        return "Access Denied", 403
+        return "접근이 거부되었습니다", 403
 
     # Basic pagination to avoid rendering every user at once
     page = max(request.args.get('page', default=1, type=int), 1)
@@ -1025,7 +1025,7 @@ def admin_panel(current_user):
 @token_required
 def approve_loan(current_user, loan_id):
     if not current_user.get('is_admin'):
-        return jsonify({'error': 'Access Denied'}), 403
+        return jsonify({'error': '접근이 거부되었습니다'}), 403
     
     try:
         # Vulnerability: Race condition in loan approval
@@ -1041,7 +1041,7 @@ def approve_loan(current_user, loan_id):
             except ValueError:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Loan amount must be greater than zero'
+                    'message': '대출 금액은 0보다 커야 합니다'
                 }), 400
 
             # Vulnerability: No transaction atomicity
@@ -1059,7 +1059,7 @@ def approve_loan(current_user, loan_id):
             
             return jsonify({
                 'status': 'success',
-                'message': 'Loan approved successfully',
+                'message': '대출이 승인되었습니다',
                 'debug_info': {  # Vulnerability: Information disclosure
                     'loan_id': loan_id,
                     'loan_amount': float(loan_amount),
@@ -1077,7 +1077,7 @@ def approve_loan(current_user, loan_id):
         
         return jsonify({
             'status': 'error',
-            'message': 'Loan not found',
+            'message': '대출 내역을 찾을 수 없습니다',
             'loan_id': loan_id
         }), 404
         
@@ -1086,7 +1086,7 @@ def approve_loan(current_user, loan_id):
         print(f"Loan approval error: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': 'Failed to approve loan',
+            'message': '대출을 승인하지 못했습니다',
             'error': str(e),
             'loan_id': loan_id
         }), 500
@@ -1096,7 +1096,7 @@ def approve_loan(current_user, loan_id):
 @token_required
 def delete_account(current_user, user_id):
     if not current_user.get('is_admin'):
-        return jsonify({'error': 'Access Denied'}), 403
+        return jsonify({'error': '접근이 거부되었습니다'}), 403
     
     try:
         # Vulnerability: No user confirmation required
@@ -1110,7 +1110,7 @@ def delete_account(current_user, user_id):
         
         return jsonify({
             'status': 'success',
-            'message': 'Account deleted successfully',
+            'message': '계정이 삭제되었습니다',
             'debug_info': {
                 'deleted_user_id': user_id,
                 'deleted_by': current_user['username'],
@@ -1129,13 +1129,13 @@ def delete_account(current_user, user_id):
 @token_required
 def toggle_account_suspension(current_user, user_id):
     if not current_user.get('is_admin'):
-        return jsonify({'error': 'Access Denied'}), 403
+        return jsonify({'error': '접근이 거부되었습니다'}), 403
 
     try:
         if user_id == current_user.get('user_id'):
             return jsonify({
                 'status': 'error',
-                'message': 'You cannot suspend your own account'
+                'message': '본인 계정은 정지할 수 없습니다'
             }), 400
 
         user = execute_query(
@@ -1146,7 +1146,7 @@ def toggle_account_suspension(current_user, user_id):
         if not user:
             return jsonify({
                 'status': 'error',
-                'message': 'User not found'
+                'message': '사용자를 찾을 수 없습니다'
             }), 404
 
         user = user[0]
@@ -1160,7 +1160,7 @@ def toggle_account_suspension(current_user, user_id):
 
         return jsonify({
             'status': 'success',
-            'message': f"Account {'suspended' if new_status else 'unsuspended'} successfully",
+            'message': f"계정이 {'정지' if new_status else '정지 해제'}되었습니다",
             'user': {
                 'id': user_id,
                 'username': user[1],
@@ -1181,7 +1181,7 @@ def toggle_account_suspension(current_user, user_id):
 @token_required
 def create_admin(current_user):
     if not current_user.get('is_admin'):
-        return jsonify({'error': 'Access Denied'}), 403
+        return jsonify({'error': '접근이 거부되었습니다'}), 403
     
     try:
         data = request.get_json()
@@ -1206,7 +1206,7 @@ def create_admin(current_user):
         
         return jsonify({
             'status': 'success',
-            'message': 'Admin created successfully'
+            'message': '관리자 계정이 만들어졌습니다'
         })
         
     except Exception as e:
@@ -1245,7 +1245,7 @@ def forgot_password():
                 # Vulnerability: Information disclosure
                 return jsonify({
                     'status': 'success',
-                    'message': 'Reset PIN has been sent to your email.',
+                    'message': '재설정 PIN이 이메일로 전송되었습니다.',
                     'debug_info': {  # Vulnerability: Information disclosure
                         'timestamp': str(datetime.now()),
                         'username': username,
@@ -1257,7 +1257,7 @@ def forgot_password():
                 # Vulnerability: Username enumeration
                 return jsonify({
                     'status': 'error',
-                    'message': 'User not found'
+                    'message': '사용자를 찾을 수 없습니다'
                 }), 404
                 
         except Exception as e:
@@ -1297,13 +1297,13 @@ def reset_password():
                 
                 return jsonify({
                     'status': 'success',
-                    'message': 'Password has been reset successfully'
+                    'message': '비밀번호가 재설정되었습니다'
                 })
             else:
                 # Vulnerability: Username enumeration possible
                 return jsonify({
                     'status': 'error',
-                    'message': 'Invalid reset PIN'
+                    'message': '재설정 PIN이 올바르지 않습니다'
                 }), 400
                 
         except Exception as e:
@@ -1311,7 +1311,7 @@ def reset_password():
             print(f"Reset password error: {str(e)}")
             return jsonify({
                 'status': 'error',
-                'message': 'Password reset failed',
+                'message': '비밀번호 재설정에 실패했습니다',
                 'error': str(e)
             }), 500
             
@@ -1344,7 +1344,7 @@ def api_v1_forgot_password():
             # Vulnerability: Information disclosure
             return jsonify({
                 'status': 'success',
-                'message': 'Reset PIN has been sent to your email.',
+                'message': '재설정 PIN이 이메일로 전송되었습니다.',
                 'debug_info': {  # Vulnerability: Information disclosure
                     'timestamp': str(datetime.now()),
                     'username': username,
@@ -1356,7 +1356,7 @@ def api_v1_forgot_password():
             # Vulnerability: Username enumeration
             return jsonify({
                 'status': 'error',
-                'message': 'User not found'
+                'message': '사용자를 찾을 수 없습니다'
             }), 404
                 
     except Exception as e:
@@ -1393,7 +1393,7 @@ def api_v2_forgot_password():
             # Fixed: No longer exposing PIN and PIN length in response
             return jsonify({
                 'status': 'success',
-                'message': 'Reset PIN has been sent to your email.',
+                'message': '재설정 PIN이 이메일로 전송되었습니다.',
                 'debug_info': {  # Still excessive data exposure but not PIN
                     'timestamp': str(datetime.now()),
                     'username': username
@@ -1404,7 +1404,7 @@ def api_v2_forgot_password():
             # Vulnerability: Username enumeration still possible
             return jsonify({
                 'status': 'error',
-                'message': 'User not found'
+                'message': '사용자를 찾을 수 없습니다'
             }), 404
                 
     except Exception as e:
@@ -1441,7 +1441,7 @@ def api_v3_forgot_password():
             # Fixed: No PIN exposure in response
             return jsonify({
                 'status': 'success',
-                'message': 'Reset PIN has been sent to your email.',
+                'message': '재설정 PIN이 이메일로 전송되었습니다.',
                 'debug_info': {  # Still minor data exposure
                     'timestamp': str(datetime.now()),
                     'username': username
@@ -1451,7 +1451,7 @@ def api_v3_forgot_password():
             # Vulnerability: Username enumeration still possible
             return jsonify({
                 'status': 'error',
-                'message': 'User not found'
+                'message': '사용자를 찾을 수 없습니다'
             }), 404
                 
     except Exception as e:
@@ -1491,7 +1491,7 @@ def api_v3_get_user(current_user, user_id):
         else:
             return jsonify({
                 'status': 'error',
-                'message': 'User not found'
+                'message': '사용자를 찾을 수 없습니다'
             }), 404
     except Exception as e:
         return jsonify({
@@ -1526,7 +1526,7 @@ def api_v1_reset_password():
             
             return jsonify({
                 'status': 'success',
-                'message': 'Password has been reset successfully',
+                'message': '비밀번호가 재설정되었습니다',
                 'debug_info': {  # Additional debug info for v1
                     'timestamp': str(datetime.now()),
                     'username': username,
@@ -1538,7 +1538,7 @@ def api_v1_reset_password():
             # Vulnerability: Username enumeration possible
             return jsonify({
                 'status': 'error',
-                'message': 'Invalid reset PIN',
+                'message': '재설정 PIN이 올바르지 않습니다',
                 'debug_info': {  # Additional debug info for v1
                     'timestamp': str(datetime.now()),
                     'username': username,
@@ -1552,7 +1552,7 @@ def api_v1_reset_password():
         print(f"Reset password error: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': 'Password reset failed',
+            'message': '비밀번호 재설정에 실패했습니다',
             'error': str(e)
         }), 500
 
@@ -1584,14 +1584,14 @@ def api_v2_reset_password():
             # Fixed: Less excessive data exposure
             return jsonify({
                 'status': 'success',
-                'message': 'Password has been reset successfully'
+                'message': '비밀번호가 재설정되었습니다'
                 # Debug info removed in v2
             })
         else:
             # Vulnerability: Username enumeration still possible
             return jsonify({
                 'status': 'error',
-                'message': 'Invalid reset PIN'
+                'message': '재설정 PIN이 올바르지 않습니다'
                 # Debug info removed in v2
             }), 400
                 
@@ -1600,7 +1600,7 @@ def api_v2_reset_password():
         print(f"Reset password error: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': 'Password reset failed'
+            'message': '비밀번호 재설정에 실패했습니다'
             # Detailed error removed in v2
         }), 500
 
@@ -1629,19 +1629,19 @@ def api_v3_reset_password():
             
             return jsonify({
                 'status': 'success',
-                'message': 'Password has been reset successfully'
+                'message': '비밀번호가 재설정되었습니다'
             })
         else:
             return jsonify({
                 'status': 'error',
-                'message': 'Invalid reset PIN'
+                'message': '재설정 PIN이 올바르지 않습니다'
             }), 400
                 
     except Exception as e:
         print(f"Reset password error: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': 'Password reset failed'
+            'message': '비밀번호 재설정에 실패했습니다'
         }), 500
 
 @app.route('/api/transactions', methods=['GET'])
@@ -1651,7 +1651,7 @@ def api_transactions(current_user):
     account_number = request.args.get('account_number')
     
     if not account_number:
-        return jsonify({'error': 'Account number required'}), 400
+        return jsonify({'error': '계좌번호가 필요합니다'}), 400
         
     # Vulnerability: SQL Injection
     query = f"""
@@ -1718,7 +1718,7 @@ def create_virtual_card(current_user):
             # Vulnerability: Sensitive data exposure
             return jsonify({
                 'status': 'success',
-                'message': 'Virtual card created successfully',
+                'message': '가상 카드가 만들어졌습니다',
                 'card_details': {
                     'id': result[0][0],
                     'card_number': card_number,
@@ -1734,7 +1734,7 @@ def create_virtual_card(current_user):
             
         return jsonify({
             'status': 'error',
-            'message': 'Failed to create virtual card'
+            'message': '가상 카드를 만들지 못했습니다'
         }), 500
         
     except Exception as e:
@@ -1813,12 +1813,12 @@ def toggle_card_freeze(current_user, card_id):
         if result:
             return jsonify({
                 'status': 'success',
-                'message': f"Card {'frozen' if result[0][0] else 'unfrozen'} successfully"
+                'message': f"카드가 {'동결' if result[0][0] else '동결 해제'}되었습니다"
             })
             
         return jsonify({
             'status': 'error',
-            'message': 'Card not found'
+            'message': '카드를 찾을 수 없습니다'
         }), 404
         
     except Exception as e:
@@ -1905,7 +1905,7 @@ def update_card_limit(current_user, card_id):
             # Vulnerability: Information disclosure - returning all updated fields
             return jsonify({
                 'status': 'success',
-                'message': 'Card updated successfully',
+                'message': '카드 정보가 변경되었습니다',
                 'debug_info': {
                     'updated_fields': updated_fields_list,  # Use list instead of dict_keys
                     'card_details': {
@@ -1922,7 +1922,7 @@ def update_card_limit(current_user, card_id):
             
         return jsonify({
             'status': 'error',
-            'message': 'Card not found'
+            'message': '카드를 찾을 수 없습니다'
         }), 404
             
     except Exception as e:
@@ -1955,7 +1955,7 @@ def fund_virtual_card(current_user, card_id):
         if not user_result or not card_result:
             return jsonify({
                 'status': 'error',
-                'message': 'Card or account not found'
+                'message': '카드 또는 계좌를 찾을 수 없습니다'
             }), 404
 
         user_account_number, user_balance = user_result[0]
@@ -1977,19 +1977,19 @@ def fund_virtual_card(current_user, card_id):
         if usd_amount <= 0:
             return jsonify({
                 'status': 'error',
-                'message': 'Funding amount must be greater than zero'
+                'message': '충전 금액은 0보다 커야 합니다'
             }), 400
 
         if card[5]:
             return jsonify({
                 'status': 'error',
-                'message': 'Card is frozen'
+                'message': '동결된 카드입니다'
             }), 400
 
         if usd_amount > float(user_balance):
             return jsonify({
                 'status': 'error',
-                'message': 'Insufficient main balance'
+                'message': '주 계좌 잔액이 부족합니다'
             }), 400
 
         converted_amount = round(
@@ -2001,7 +2001,7 @@ def fund_virtual_card(current_user, card_id):
         if new_card_balance > float(card[3]):
             return jsonify({
                 'status': 'error',
-                'message': 'Funding would exceed the card limit'
+                'message': '충전하면 카드 한도를 초과합니다'
             }), 400
 
         funding_description = f"Funded {card_currency} virtual card from main balance"
@@ -2050,7 +2050,7 @@ def fund_virtual_card(current_user, card_id):
 
         return jsonify({
             'status': 'success',
-            'message': 'Card funded successfully',
+            'message': '카드가 충전되었습니다',
             'funding': {
                 'card_id': card_id,
                 'card_currency': card_currency,
@@ -2152,7 +2152,7 @@ def create_bill_payment(current_user):
         if not payer or not biller:
             return jsonify({
                 'status': 'error',
-                'message': 'Biller or user account not found'
+                'message': '납부처 또는 사용자 계좌를 찾을 수 없습니다'
             }), 404
 
         payer = payer[0]
@@ -2180,13 +2180,13 @@ def create_bill_payment(current_user):
             if card[2]:  # is_frozen
                 return jsonify({
                     'status': 'error',
-                    'message': 'Card is frozen'
+                    'message': '동결된 카드입니다'
                 }), 400
                 
             if amount > float(card[0]):  # current_balance
                 return jsonify({
                     'status': 'error',
-                    'message': 'Insufficient card balance'
+                    'message': '카드 잔액이 부족합니다'
                 }), 400
                 
         elif payment_method == 'balance':
@@ -2195,7 +2195,7 @@ def create_bill_payment(current_user):
             if amount > payer_balance:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Insufficient balance'
+                    'message': '잔액이 부족합니다'
                 }), 400
         
         # Generate reference number
@@ -2261,7 +2261,7 @@ def create_bill_payment(current_user):
         # Vulnerability: Information disclosure
         return jsonify({
             'status': 'success',
-            'message': 'Payment processed successfully',
+            'message': '결제가 처리되었습니다',
             'payment_details': {
                 'reference': reference,
                 'amount': amount,
@@ -2347,7 +2347,7 @@ def ai_chat_authenticated(current_user):
         if not user_message:
             return jsonify({
                 'status': 'error',
-                'message': 'Message is required'
+                'message': '메시지를 입력해 주세요'
             }), 400
         
         # VULNERABILITY: Pass sensitive user context directly to AI
@@ -2393,7 +2393,7 @@ def ai_chat_authenticated(current_user):
         # VULNERABILITY: Detailed error messages
         return jsonify({
             'status': 'error',
-            'message': f'AI chat error: {str(e)}',
+            'message': f'AI 채팅 오류: {str(e)}',
             'system_info': ai_agent.get_system_info()
         }), 500
 
@@ -2416,7 +2416,7 @@ def ai_chat_anonymous():
         if not user_message:
             return jsonify({
                 'status': 'error', 
-                'message': 'Message is required'
+                'message': '메시지를 입력해 주세요'
             }), 400
         
         # VULNERABILITY: No user context means no authorization but still dangerous
@@ -2432,7 +2432,7 @@ def ai_chat_anonymous():
     except Exception as e:
         return jsonify({
             'status': 'error',
-            'message': f'Anonymous AI chat error: {str(e)}',
+            'message': f'익명 AI 채팅 오류: {str(e)}',
             'system_info': ai_agent.get_system_info()
         }), 500
 

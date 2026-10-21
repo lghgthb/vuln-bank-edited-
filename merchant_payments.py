@@ -93,7 +93,7 @@ def merchant_required(f):
             if not merchant:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Missing or invalid merchant credentials',
+                    'message': '가맹점 인증 정보가 없거나 올바르지 않습니다',
                     'accepted_auth_methods': [
                         'X-Merchant-Api-Key',
                         'Authorization: Bearer <merchant_jwt>'
@@ -103,7 +103,7 @@ def merchant_required(f):
             if not merchant.get('is_active'):
                 return jsonify({
                     'status': 'error',
-                    'message': 'Merchant account is inactive',
+                    'message': '비활성화된 가맹점 계정입니다',
                     'merchant_id': merchant.get('id')
                 }), 403
 
@@ -167,7 +167,7 @@ def init_merchant_payment_routes(app):
             if not result:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Failed to register merchant'
+                    'message': '가맹점 등록에 실패했습니다'
                 }), 500
 
             merchant = merchant_tuple_to_dict(result[0])
@@ -175,7 +175,7 @@ def init_merchant_payment_routes(app):
 
             return jsonify({
                 'status': 'success',
-                'message': 'Merchant registered successfully',
+                'message': '가맹점이 등록되었습니다',
                 'merchant': merchant,
                 'api_key': api_key,
                 'token': token,
@@ -216,7 +216,7 @@ def init_merchant_payment_routes(app):
             if not result:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Invalid merchant credentials'
+                    'message': '가맹점 로그인 정보가 올바르지 않습니다'
                 }), 401
 
             merchant = merchant_tuple_to_dict(result[0])
@@ -224,7 +224,7 @@ def init_merchant_payment_routes(app):
 
             return jsonify({
                 'status': 'success',
-                'message': 'Merchant login successful',
+                'message': '가맹점 로그인에 성공했습니다',
                 'token': token,
                 'api_key': merchant['api_key'],
                 'merchant': merchant
@@ -291,7 +291,7 @@ def init_merchant_payment_routes(app):
                 )
                 return jsonify({
                     'status': 'error',
-                    'message': 'Payment declined',
+                    'message': '결제가 거절되었습니다',
                     'payment_id': payment_id,
                     'failure_reason': 'invalid_card_number',
                     'debug_info': {
@@ -330,7 +330,7 @@ def init_merchant_payment_routes(app):
                 )
                 return jsonify({
                     'status': 'error',
-                    'message': 'Payment declined',
+                    'message': '결제가 거절되었습니다',
                     'payment_id': payment_id,
                     'failure_reason': failure_reason,
                     'debug_info': {
@@ -382,7 +382,7 @@ def init_merchant_payment_routes(app):
 
             return jsonify({
                 'status': 'success',
-                'message': 'Payment approved',
+                'message': '결제가 승인되었습니다',
                 'payment': {
                     'id': payment_id,
                     'merchant_id': current_merchant['id'],
@@ -460,7 +460,7 @@ def init_merchant_payment_routes(app):
             if not result:
                 return jsonify({
                     'status': 'error',
-                    'message': 'Payment not found',
+                    'message': '결제 내역을 찾을 수 없습니다',
                     'payment_id': payment_id
                 }), 404
 
