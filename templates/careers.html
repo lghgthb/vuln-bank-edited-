@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Careers - VulnBank</title>
+    <title>채용 - VulnBank</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,136 +71,136 @@
 <body>
     <div class="careers-page">
         <div class="legal-nav">
-            <a href="{{ url_for('index') }}" class="back-link">&larr; Back to home</a>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <a href="{{ url_for('index') }}" class="back-link">&larr; 홈으로 돌아가기</a>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="다크 모드 전환">
                 <span class="toggle-icon toggle-icon-sun">☀️</span>
                 <span class="toggle-slider"></span>
                 <span class="toggle-icon toggle-icon-moon">🌙</span>
             </button>
         </div>
-        <h1>Careers</h1>
-        <p class="subtitle">Join our team of dedicated professionals working tirelessly to create the most vulnerable banking application possible.</p>
+        <h1>채용</h1>
+        <p class="subtitle">세상에서 가장 취약한 뱅킹 애플리케이션을 만들기 위해 지칠 줄 모르고 일하는 헌신적인 전문가 팀에 합류하세요.</p>
 
         <!-- Search with XSS vulnerability -->
         <div class="search-container">
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search open positions..." oninput="handleSearch(this.value)">
-                <button type="button" onclick="handleSearch(document.getElementById('search-input').value, true)">Search</button>
+                <input type="text" id="search-input" placeholder="채용 중인 포지션 검색..." oninput="handleSearch(this.value)">
+                <button type="button" onclick="handleSearch(document.getElementById('search-input').value, true)">검색</button>
             </div>
             <div id="search-info" class="search-results-info" style="display:none;"></div>
         </div>
 
-        <h2>Why Work at VulnBank?</h2>
-        <p>We offer a unique opportunity to work on cutting-edge security challenges every single day. Our commitment to insecurity means you'll never face a boring day of "secure coding." We're not just breaking things—we're leaving them broken in creative ways.</p>
+        <h2>왜 VulnBank에서 일해야 할까요?</h2>
+        <p>저희는 매일같이 최첨단 보안 과제에 도전할 수 있는 특별한 기회를 제공합니다. 불안전함을 향한 저희의 헌신 덕분에 "시큐어 코딩"으로 지루한 하루를 보낼 일은 결코 없습니다. 저희는 단순히 무언가를 망가뜨리는 데 그치지 않고, 창의적인 방식으로 망가진 채 내버려 둡니다.</p>
 
         <div class="benefits">
             <div class="benefit-card">
-                <h4>Job Security</h4>
-                <p>With zero rate limiting, no input validation, and intentional vulnerabilities, our job security is guaranteed. We'll always need developers to "maintain" our unique security posture.</p>
+                <h4>고용 안정성</h4>
+                <p>요청 제한 없음, 입력 검증 없음, 의도적인 취약점까지 갖췄으니 고용 안정성은 보장됩니다. 저희만의 독특한 보안 태세를 "유지"할 개발자는 언제나 필요하니까요.</p>
             </div>
             <div class="benefit-card">
-                <h4>Learning Opportunities</h4>
-                <p>Every bug report is a learning opportunity! Our users generously find vulnerabilities we didn't even know we had. It's like having a free penetration testing team.</p>
+                <h4>배움의 기회</h4>
+                <p>모든 버그 리포트는 배움의 기회입니다! 사용자들이 저희도 몰랐던 취약점을 아낌없이 찾아 줍니다. 무료 모의 해킹 팀을 둔 것과 같죠.</p>
             </div>
             <div class="benefit-card">
-                <h4>Work-Life Balance</h4>
-                <p>We don't believe in on-call rotations because our incidents are permanent. Once a vulnerability is deployed, it stays deployed. No patches means no page notifications at 3 AM.</p>
+                <h4>워라밸</h4>
+                <p>저희 장애는 영구적이라서 온콜 당번 같은 건 두지 않습니다. 한번 배포된 취약점은 계속 배포된 상태로 남습니다. 패치가 없으니 새벽 3시에 호출 알림이 올 일도 없습니다.</p>
             </div>
             <div class="benefit-card">
-                <h4>Open Source Culture</h4>
-                <p>Our source code is basically open source anyway. Anyone who can enumerate our directories can read it. We embrace transparency through negligence.</p>
+                <h4>오픈 소스 문화</h4>
+                <p>저희 소스 코드는 어차피 사실상 오픈 소스입니다. 디렉터리를 열거할 줄 아는 사람이라면 누구나 읽을 수 있죠. 저희는 과실을 통한 투명성을 지향합니다.</p>
             </div>
         </div>
 
-        <h2>Open Positions</h2>
+        <h2>채용 중인 포지션</h2>
 
         <div class="opening job-opening-item">
-            <h3>Security Engineer</h3>
-            <span class="department">Engineering</span>
-            <p>We're looking for someone to own our security strategy. The ideal candidate will not ask questions like "why is the admin panel at /sup3r_s3cr3t_admin" or "can we please hash the passwords." This role is mostly ceremonial.</p>
-            <p><strong>Responsibilities:</strong></p>
+            <h3>보안 엔지니어</h3>
+            <span class="department">엔지니어링</span>
+            <p>저희 보안 전략을 책임질 분을 찾습니다. 이상적인 지원자는 "관리자 패널이 왜 /sup3r_s3cr3t_admin에 있나요?"나 "비밀번호 해시 좀 하면 안 될까요?" 같은 질문을 하지 않습니다. 이 역할은 대부분 형식적입니다.</p>
+            <p><strong>주요 업무:</strong></p>
             <ul>
-                <li>Write blog posts about how "security is a journey"</li>
-                <li>Nod thoughtfully during code reviews when someone suggests encrypting data</li>
-                <li>Occasionally update the "last breached" timestamp on our homepage</li>
-                <li>Explain to management why we can't fix the XSS that allows users to steal other users' JWT tokens</li>
+                <li>"보안은 여정입니다"라는 내용의 블로그 글 작성</li>
+                <li>코드 리뷰에서 누군가 데이터 암호화를 제안하면 사려 깊게 고개 끄덕이기</li>
+                <li>홈페이지의 "마지막 침해 일시"를 가끔 업데이트하기</li>
+                <li>사용자가 다른 사용자의 JWT 토큰을 훔칠 수 있는 XSS를 왜 못 고치는지 경영진에게 설명하기</li>
             </ul>
-            <p><strong>Requirements:</strong></p>
+            <p><strong>자격 요건:</strong></p>
             <ul>
-                <li>Must believe that "security through obscurity" is a valid strategy</li>
-                <li>Ability to say "we'll fix it in v2" with a straight face</li>
-                <li>Comfortable explaining to customers why their passwords appear in breach databases</li>
+                <li>"은둔을 통한 보안"이 유효한 전략이라고 믿어야 함</li>
+                <li>"v2에서 고칠게요"를 정색하고 말할 수 있는 능력</li>
+                <li>고객의 비밀번호가 왜 유출 데이터베이스에 있는지 태연하게 설명할 수 있는 분</li>
             </ul>
         </div>
 
         <div class="opening job-opening-item">
-            <h3>Backend Developer</h3>
-            <span class="department">Engineering</span>
-            <p>Join our team of hardworking developers building the future of vulnerable banking. We practice "agile" development in the truest sense—we pivot quickly when someone discovers our credentials table.</p>
-            <p><strong>Responsibilities:</strong></p>
+            <h3>백엔드 개발자</h3>
+            <span class="department">엔지니어링</span>
+            <p>취약한 뱅킹의 미래를 만들어 가는 성실한 개발자 팀에 합류하세요. 저희는 가장 진정한 의미의 "애자일" 개발을 실천합니다. 누군가 저희 인증 정보 테이블을 발견하면 재빨리 방향을 틉니다.</p>
+            <p><strong>주요 업무:</strong></p>
             <ul>
-                <li>Write SQL queries directly from user input—it's faster, and what could go wrong?</li>
-                <li>Implement new features without testing, because our users will test them for us</li>
-                <li>Avoid using security linters that flag "intentional vulnerabilities"</li>
-                <li>Respond to GitHub issues with "works on my machine"</li>
+                <li>사용자 입력으로 SQL 쿼리를 바로 작성하기. 더 빠르고, 잘못될 게 뭐가 있겠어요?</li>
+                <li>사용자가 대신 테스트해 줄 테니 테스트 없이 새 기능 구현하기</li>
+                <li>"의도적인 취약점"을 지적하는 보안 린터 사용 피하기</li>
+                <li>GitHub 이슈에 "제 컴퓨터에서는 잘 되는데요"라고 답변하기</li>
             </ul>
-            <p><strong>Requirements:</strong></p>
+            <p><strong>자격 요건:</strong></p>
             <ul>
-                <li>Experience with string concatenation in SQL queries</li>
-                <li>Familiarity with storing secrets in environment variables (and then committing them)</li>
-                <li>Ability to implement authentication without reading any documentation on the subject</li>
-                <li>Must think JWT stands for "Just Trust Us"</li>
-            </ul>
-        </div>
-
-        <div class="opening job-opening-item">
-            <h3>DevOps Engineer</h3>
-            <span class="department">Infrastructure</span>
-            <p>Our infrastructure is as secure as our application, which is to say: not very. We're seeking someone to maintain our delicate balance of "it works" and "it's catastrophically broken."</p>
-            <p><strong>Responsibilities:</strong></p>
-            <ul>
-                <li>Deploy code to production without testing it first</li>
-                <li>Ensure our servers remain accessible to everyone, including unauthorized users</li>
-                <li>Set up monitoring that we will ignore</li>
-                <li>Occasionally restart the server when memory usage hits 100% due to an infinite loop we can't find</li>
-            </ul>
-            <p><strong>Requirements:</strong></p>
-            <ul>
-                <li>Experience with servers that have been compromised multiple times</li>
-                <li>Familiarity with the phrase "we'll add authentication later"</li>
-                <li>Comfortable debugging production issues while users are actively exploiting them</li>
+                <li>SQL 쿼리 문자열 이어 붙이기 경험</li>
+                <li>시크릿을 환경 변수에 저장하는 일(그리고 그걸 커밋하는 일)에 익숙한 분</li>
+                <li>관련 문서를 하나도 읽지 않고 인증을 구현할 수 있는 능력</li>
+                <li>JWT가 "Just Trust Us(그냥 믿어 주세요)"의 약자라고 생각해야 함</li>
             </ul>
         </div>
 
         <div class="opening job-opening-item">
-            <h3>Customer Support Specialist</h3>
-            <span class="department">Support</span>
-            <p>You'll be the first line of defense when customers notice their balance has changed unexpectedly. This role requires patience, empathy, and a willingness to say "we're looking into it" indefinitely.</p>
-            <p><strong>Responsibilities:</strong></p>
+            <h3>DevOps 엔지니어</h3>
+            <span class="department">인프라</span>
+            <p>저희 인프라는 애플리케이션만큼 안전합니다. 즉, 별로 안전하지 않습니다. "돌아가긴 한다"와 "처참하게 망가졌다" 사이의 아슬아슬한 균형을 유지해 줄 분을 찾습니다.</p>
+            <p><strong>주요 업무:</strong></p>
             <ul>
-                <li>Help users recover accounts after someone guessed their password</li>
-                <li>Explain that unauthorized transactions are "features"</li>
-                <li>Respond to emails asking why our app appears on hacking forums</li>
-                <li>Forward vulnerability reports to /dev/null</li>
+                <li>테스트 없이 코드를 프로덕션에 배포하기</li>
+                <li>권한 없는 사용자를 포함한 모든 사람이 서버에 계속 접근할 수 있도록 보장하기</li>
+                <li>어차피 무시할 모니터링 구축하기</li>
+                <li>찾지 못한 무한 루프 때문에 메모리 사용량이 100%가 되면 가끔 서버 재시작하기</li>
             </ul>
-            <p><strong>Requirements:</strong></p>
+            <p><strong>자격 요건:</strong></p>
             <ul>
-                <li>Ability to say "your security is important to us" without laughing</li>
-                <li>Experience writing emails that don't admit fault</li>
-                <li>Knowledge of copypaste templates for "we take your privacy seriously"</li>
-                <li>Must not have a background in security (it would only be frustrating)</li>
+                <li>여러 번 해킹당한 서버를 다뤄 본 경험</li>
+                <li>"인증은 나중에 추가할게요"라는 말에 익숙한 분</li>
+                <li>사용자가 한창 악용 중인 프로덕션 이슈를 태연하게 디버깅할 수 있는 분</li>
             </ul>
         </div>
 
-        <h2>How to Apply</h2>
-        <p>Email your resume to <code>careers@vulnbank.example</code>. Please include a cover letter explaining which vulnerability you're most excited to exploit. Bonus points if you submit your application via SQL injection in our contact form—shows initiative!</p>
+        <div class="opening job-opening-item">
+            <h3>고객 지원 전문가</h3>
+            <span class="department">고객 지원</span>
+            <p>고객이 잔액이 예기치 않게 바뀐 걸 알아챘을 때 최전선에서 대응하게 됩니다. 이 역할에는 인내심, 공감 능력, 그리고 "확인 중입니다"를 무기한 말할 수 있는 의지가 필요합니다.</p>
+            <p><strong>주요 업무:</strong></p>
+            <ul>
+                <li>누군가 비밀번호를 맞혀 버린 사용자의 계정 복구 돕기</li>
+                <li>무단 거래가 "기능"이라고 설명하기</li>
+                <li>저희 앱이 왜 해킹 포럼에 올라와 있는지 묻는 이메일에 답변하기</li>
+                <li>취약점 제보를 /dev/null로 전달하기</li>
+            </ul>
+            <p><strong>자격 요건:</strong></p>
+            <ul>
+                <li>"고객님의 보안은 저희에게 중요합니다"를 웃지 않고 말할 수 있는 능력</li>
+                <li>잘못을 인정하지 않는 이메일 작성 경험</li>
+                <li>"저희는 고객님의 개인정보를 소중히 여깁니다" 복붙 템플릿에 대한 지식</li>
+                <li>보안 관련 경력이 없어야 함(괜히 답답하기만 할 테니까요)</li>
+            </ul>
+        </div>
+
+        <h2>지원 방법</h2>
+        <p>이력서를 <code>careers@vulnbank.example</code>로 보내 주세요. 가장 악용해 보고 싶은 취약점이 무엇인지 설명하는 자기소개서도 함께 보내 주세요. 문의 양식에 SQL 인젝션으로 지원서를 제출하시면 가산점이 있습니다. 주도성을 보여 주니까요!</p>
 
         <div id="no-results" class="no-results" style="display:none;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <p>No positions found matching your search.</p>
+            <p>검색 조건에 맞는 포지션이 없습니다.</p>
         </div>
     </div>
     <script>
@@ -220,7 +220,7 @@
             // XSS vulnerability: Reflect user input directly without sanitization
             if (query && query.trim() !== '') {
                 searchInfo.style.display = 'block';
-                searchInfo.innerHTML = 'Searching for: <strong>' + query + '</strong>'; // XSS vulnerability here
+                searchInfo.innerHTML = '검색어: <strong>' + query + '</strong>'; // XSS vulnerability here
 
                 // Update URL parameter to hint at vulnerability
                 if (updateUrl) {
