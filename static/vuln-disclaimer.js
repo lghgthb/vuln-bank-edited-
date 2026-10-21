@@ -30,8 +30,8 @@
                                 <line x1="12" y1="17" x2="12.01" y2="17"></line>
                             </svg>
                         </div>
-                        <h3 id="disclaimer-title"> Heads up!</h3>
-                        <button class="vuln-disclaimer-close" aria-label="Close" onclick="dismissVulnDisclaimer()">
+                        <h3 id="disclaimer-title"> 잠깐만요!</h3>
+                        <button class="vuln-disclaimer-close" aria-label="닫기" onclick="dismissVulnDisclaimer()">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -39,13 +39,13 @@
                         </button>
                     </div>
                     <div class="vuln-disclaimer-body">
-                        <p>This isn't a real bank. VulnBank was built with intentional security flaws for learning and practice.</p>
-                        <p class="vuln-disclaimer-subtext">You'll find things like XSS, CSRF, SQL injection, and broken authentication—all on purpose.</p>
-                        <p class="vuln-disclaimer-warning">Don't use any real passwords or personal info here.</p>
+                        <p>이곳은 실제 은행이 아닙니다. VulnBank는 학습과 실습을 위해 의도적으로 보안 결함을 넣어 만든 애플리케이션입니다.</p>
+                        <p class="vuln-disclaimer-subtext">XSS, CSRF, SQL 인젝션, 취약한 인증 같은 문제를 만나게 될 텐데, 모두 의도된 것입니다.</p>
+                        <p class="vuln-disclaimer-warning">실제 비밀번호나 개인정보는 절대 입력하지 마세요.</p>
                     </div>
                     <div class="vuln-disclaimer-actions">
-                        <button id="disclaimer-acknowledge" class="vuln-disclaimer-btn vuln-disclaimer-btn-primary">Got it</button>
-                        <button onclick="dismissVulnDisclaimer()" class="vuln-disclaimer-btn vuln-disclaimer-btn-secondary">Remind me later</button>
+                        <button id="disclaimer-acknowledge" class="vuln-disclaimer-btn vuln-disclaimer-btn-primary">확인했습니다</button>
+                        <button onclick="dismissVulnDisclaimer()" class="vuln-disclaimer-btn vuln-disclaimer-btn-secondary">나중에 다시 알림</button>
                     </div>
                 </div>
             </div>

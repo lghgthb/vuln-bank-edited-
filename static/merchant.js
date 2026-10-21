@@ -70,9 +70,9 @@ async function handleMerchantRegister(event) {
             return;
         }
 
-        showMerchantMessage(data.message || 'Merchant registration failed');
+        showMerchantMessage(data.message || '가맹점 등록에 실패했습니다');
     } catch (error) {
-        showMerchantMessage('Merchant registration failed');
+        showMerchantMessage('가맹점 등록에 실패했습니다');
     }
 }
 
@@ -98,9 +98,9 @@ async function handleMerchantLogin(event) {
             return;
         }
 
-        showMerchantMessage(data.message || 'Merchant login failed');
+        showMerchantMessage(data.message || '가맹점 로그인에 실패했습니다');
     } catch (error) {
-        showMerchantMessage('Merchant login failed');
+        showMerchantMessage('가맹점 로그인에 실패했습니다');
     }
 }
 
@@ -135,7 +135,7 @@ function setMerchantDate() {
     if (!dateElement) return;
 
     const today = new Date();
-    dateElement.textContent = today.toLocaleDateString('en-US', {
+    dateElement.textContent = today.toLocaleDateString('ko-KR', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
@@ -148,13 +148,13 @@ function hydrateMerchantProfile() {
     const apiKey = localStorage.getItem('merchant_api_key') || merchant.api_key || '-';
     const token = localStorage.getItem('merchant_jwt_token') || '-';
 
-    setText('merchantSidebarName', merchant.name || 'Merchant');
-    setText('merchantGreeting', merchant.name ? `${merchant.name} Console` : 'Merchant Console');
+    setText('merchantSidebarName', merchant.name || '가맹점');
+    setText('merchantGreeting', merchant.name ? `${merchant.name} 콘솔` : '가맹점 콘솔');
     setText('merchantIdValue', merchant.id || '-');
     setText('merchantEmailValue', merchant.email || '-');
     setText('merchantApiKeyValue', apiKey);
     setText('merchantTokenValue', token);
-    setText('authMethod', apiKey !== '-' ? 'API Key' : 'JWT');
+    setText('authMethod', apiKey !== '-' ? 'API 키' : 'JWT');
     setText('integrationApiKeyHeader', `X-Merchant-Api-Key: ${apiKey}`);
     setText('integrationBearerHeader', `Authorization: Bearer ${token}`);
     setText('integrationFetchExample', buildIntegrationFetchExample(apiKey));
@@ -177,7 +177,7 @@ async function refreshMerchantProfile() {
             merchantLogout();
         }
     } catch (error) {
-        showMerchantMessage('Could not refresh merchant profile');
+        showMerchantMessage('가맹점 프로필을 새로고침하지 못했습니다');
     }
 }
 
@@ -197,17 +197,17 @@ async function handleMerchantCharge(event) {
     document.getElementById('chargeExpiry').value = payload.expiry_date;
 
     if (payload.card_number.length !== 16) {
-        showMerchantMessage('Card number must be 16 digits');
+        showMerchantMessage('카드 번호는 16자리여야 합니다');
         return;
     }
 
     if (payload.cvv.length !== 3) {
-        showMerchantMessage('CVV must be 3 digits');
+        showMerchantMessage('CVV는 3자리여야 합니다');
         return;
     }
 
     if (!/^\d{2}\/\d{2}$/.test(payload.expiry_date)) {
-        showMerchantMessage('Expiry must be in MM/YY format');
+        showMerchantMessage('유효기간은 MM/YY 형식이어야 합니다');
         return;
     }
 
@@ -220,17 +220,17 @@ async function handleMerchantCharge(event) {
         const data = await response.json();
 
         if (data.status === 'success') {
-            showMerchantMessage(`Payment approved: ${data.payment.authorization_code}`, 'success');
+            showMerchantMessage(`결제가 승인되었습니다: ${data.payment.authorization_code}`, 'success');
             event.target.reset();
             document.getElementById('chargeCurrency').value = 'USD';
             await fetchMerchantPayments();
             return;
         }
 
-        showMerchantMessage(data.failure_reason || data.message || 'Payment declined');
+        showMerchantMessage(data.failure_reason || data.message || '결제가 거절되었습니다');
         await fetchMerchantPayments();
     } catch (error) {
-        showMerchantMessage('Payment request failed');
+        showMerchantMessage('결제 요청에 실패했습니다');
     }
 }
 
@@ -285,7 +285,7 @@ function formatExpiry(value) {
 async function fetchMerchantPayments() {
     const tableBody = document.getElementById('merchantPaymentsBody');
     if (tableBody) {
-        tableBody.innerHTML = '<tr><td colspan="7" class="empty-table">Loading payments...</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" class="empty-table">결제 내역을 불러오는 중...</td></tr>';
     }
 
     try {
@@ -299,7 +299,7 @@ async function fetchMerchantPayments() {
                 merchantLogout();
                 return;
             }
-            showMerchantMessage(data.message || 'Could not load payments');
+            showMerchantMessage(data.message || '결제 내역을 불러오지 못했습니다');
             renderMerchantPayments([]);
             return;
         }
@@ -307,7 +307,7 @@ async function fetchMerchantPayments() {
         renderMerchantPayments(data.payments || []);
         updateMerchantStats(data.payments || [], data.debug_info);
     } catch (error) {
-        showMerchantMessage('Could not load payments');
+        showMerchantMessage('결제 내역을 불러오지 못했습니다');
         renderMerchantPayments([]);
     }
 }
@@ -317,7 +317,7 @@ function renderMerchantPayments(payments) {
     if (!tableBody) return;
 
     if (!payments.length) {
-        tableBody.innerHTML = '<tr><td colspan="7" class="empty-table">No payments yet</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" class="empty-table">아직 결제 내역이 없습니다</td></tr>';
         return;
     }
 
@@ -347,7 +347,7 @@ function updateMerchantStats(payments, debugInfo) {
     setText('failedCount', failed.length);
 
     if (debugInfo && debugInfo.looked_up_by_merchant && debugInfo.looked_up_by_merchant.auth_method) {
-        setText('authMethod', debugInfo.looked_up_by_merchant.auth_method === 'api_key' ? 'API Key' : 'JWT');
+        setText('authMethod', debugInfo.looked_up_by_merchant.auth_method === 'api_key' ? 'API 키' : 'JWT');
     }
 }
 
@@ -385,7 +385,7 @@ function copyMerchantCredential(elementId) {
     if (!value || value === '-') return;
 
     navigator.clipboard.writeText(value).then(() => {
-        showMerchantMessage('Copied', 'success');
+        showMerchantMessage('복사되었습니다', 'success');
     });
 }
 

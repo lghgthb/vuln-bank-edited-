@@ -85,12 +85,12 @@ def token_required(f):
             token = request.cookies['token']
             
         if not token:
-            return jsonify({'error': 'Token is missing'}), 401
+            return jsonify({'error': '토큰이 없습니다'}), 401
 
         try:
             current_user = verify_token(token)
             if current_user is None:
-                return jsonify({'error': 'Invalid token'}), 401
+                return jsonify({'error': '유효하지 않은 토큰입니다'}), 401
                 
             # Vulnerability: No token expiration check
             return f(current_user, *args, **kwargs)
@@ -98,7 +98,7 @@ def token_required(f):
         except Exception as e:
             # Vulnerability: Detailed error exposure
             return jsonify({
-                'error': 'Invalid token', 
+                'error': '유효하지 않은 토큰입니다', 
                 'details': str(e)
             }), 401
             
@@ -109,10 +109,10 @@ def init_auth_routes(app):
     @app.route('/api/login', methods=['POST'])
     def api_login():
         auth = request.get_json()
-        suspension_message = 'Your account has been suspended, contact support or walk in to any of our branch to resolve the issue'
+        suspension_message = '계정이 정지되었습니다. 문제를 해결하려면 고객센터에 문의하시거나 가까운 지점을 방문해 주세요'
         
         if not auth or not auth.get('username') or not auth.get('password'):
-            return jsonify({'error': 'Missing credentials'}), 401
+            return jsonify({'error': '로그인 정보가 누락되었습니다'}), 401
             
         # Vulnerability: SQL Injection still possible here
         conn = sqlite3.connect('bank.db')
@@ -123,7 +123,7 @@ def init_auth_routes(app):
         conn.close()
         
         if not user:
-            return jsonify({'error': 'Invalid credentials'}), 401
+            return jsonify({'error': '아이디 또는 비밀번호가 올바르지 않습니다'}), 401
 
         if len(user) > 9 and user[9]:
             return jsonify({'error': suspension_message}), 403
@@ -164,7 +164,7 @@ def init_auth_routes(app):
                 'balance': user[1],
                 'checked_by': current_user['username']
             })
-        return jsonify({'error': 'Account not found'}), 404
+        return jsonify({'error': '계좌를 찾을 수 없습니다'}), 404
 
     @app.route('/api/transfer', methods=['POST'])
     @token_required
@@ -172,7 +172,7 @@ def init_auth_routes(app):
         data = request.get_json()
         
         if not data or not data.get('to_account') or not data.get('amount'):
-            return jsonify({'error': 'Missing transfer details'}), 400
+            return jsonify({'error': '송금 정보가 누락되었습니다'}), 400
             
         # Vulnerability: No amount validation
         amount = float(data.get('amount'))
@@ -204,4 +204,4 @@ def init_auth_routes(app):
             })
             
         conn.close()
-        return jsonify({'error': 'Insufficient funds'}), 400
+        return jsonify({'error': '잔액이 부족합니다'}), 400

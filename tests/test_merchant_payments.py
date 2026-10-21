@@ -86,11 +86,11 @@ class MerchantPaymentApiTests(unittest.TestCase):
         dashboard_response = self.client.get("/merchant/dashboard")
 
         self.assertEqual(login_response.status_code, 200)
-        self.assertIn(b"Merchant sign in", login_response.data)
+        self.assertIn("가맹점 로그인".encode(), login_response.data)
         self.assertEqual(register_response.status_code, 200)
-        self.assertIn(b"Create merchant", register_response.data)
+        self.assertIn("가맹점 만들기".encode(), register_response.data)
         self.assertEqual(dashboard_response.status_code, 200)
-        self.assertIn(b"Merchant Console", dashboard_response.data)
+        self.assertIn("가맹점 콘솔".encode(), dashboard_response.data)
 
     def test_merchant_login_returns_jwt_and_api_key(self):
         response = self.client.post(

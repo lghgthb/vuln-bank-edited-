@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Merchant Login - VulnBank</title>
+    <title>가맹점 로그인 - VulnBank</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon-16.svg') }}" sizes="16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,7 +11,7 @@
     <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("vb-theme") || "light");</script>
 </head>
 <body class="auth-page">
-    <a href="#merchantLoginForm" class="skip-link">Skip to merchant login</a>
+    <a href="#merchantLoginForm" class="skip-link">가맹점 로그인으로 건너뛰기</a>
 
     <div class="auth-brand">
         <div class="auth-brand-content">
@@ -21,16 +21,16 @@
                 </div>
                 <span class="brand-logo-text">VulnBank</span>
             </div>
-            <h2>Merchant Console</h2>
-            <p>Accept VulnBank virtual cards in sandbox ecommerce labs.</p>
+            <h2>가맹점 콘솔</h2>
+            <p>샌드박스 이커머스 실습 환경에서 VulnBank 가상 카드 결제를 받아보세요.</p>
             <div class="auth-trust-signals">
                 <div class="auth-trust-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"></path><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 15h.01"></path><path d="M11 15h2"></path></svg>
-                    Raw Card API
+                    원시 카드 API
                 </div>
                 <div class="auth-trust-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                    Test Payments
+                    테스트 결제
                 </div>
             </div>
         </div>
@@ -38,27 +38,27 @@
 
     <div class="auth-form-panel">
         <div class="auth-form-container">
-            <h1>Merchant sign in</h1>
-            <p class="auth-subtitle">Use your merchant credentials.</p>
+            <h1>가맹점 로그인</h1>
+            <p class="auth-subtitle">가맹점 계정 정보로 로그인하세요.</p>
 
             <div id="merchantAuthMessage"></div>
 
             <form id="merchantLoginForm">
                 <div class="auth-input-group">
-                    <input type="email" name="email" id="email" placeholder="Email" required aria-label="Email">
+                    <input type="email" name="email" id="email" placeholder="이메일" required aria-label="이메일">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"></path><path d="m22 6-10 7L2 6"></path></svg>
                 </div>
                 <div class="auth-input-group">
-                    <input type="password" name="password" id="password" placeholder="Password" required aria-label="Password">
+                    <input type="password" name="password" id="password" placeholder="비밀번호" required aria-label="비밀번호">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
-                <button type="submit">Sign In</button>
+                <button type="submit">로그인</button>
             </form>
 
             <div class="auth-links">
-                <a href="{{ url_for('merchant_register_page') }}">Create merchant account</a>
+                <a href="{{ url_for('merchant_register_page') }}">가맹점 계정 만들기</a>
                 <br>
-                <a href="{{ url_for('login') }}">Personal banking login</a>
+                <a href="{{ url_for('login') }}">개인 뱅킹 로그인</a>
             </div>
         </div>
     </div>

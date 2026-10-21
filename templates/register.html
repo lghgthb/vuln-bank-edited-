@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Register - Vulnerable Bank</title>
+    <title>회원가입 - Vulnerable Bank</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon-16.svg') }}" sizes="16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,7 +11,7 @@
     <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("vb-theme") || "light");</script>
 </head>
 <body class="auth-page">
-    <a href="#registerForm" class="skip-link">Skip to registration form</a>
+    <a href="#registerForm" class="skip-link">회원가입 양식으로 건너뛰기</a>
 
     <!-- Brand Panel -->
     <div class="auth-brand">
@@ -22,16 +22,16 @@
                 </div>
                 <span class="brand-logo-text">VulnBank</span>
             </div>
-            <h2>Start your financial journey today.</h2>
-            <p>Open a free account in seconds. No paperwork, no hidden fees.</p>
+            <h2>오늘 바로 금융 여정을 시작하세요.</h2>
+            <p>몇 초 만에 무료 계좌 개설. 서류도, 숨은 수수료도 없습니다.</p>
             <div class="auth-trust-signals">
                 <div class="auth-trust-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Encrypted (trust me)
+                    암호화됨 (믿어주세요)
                 </div>
                 <div class="auth-trust-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    ISO 20 Something
+                    ISO 20 어쩌고
                 </div>
             </div>
         </div>
@@ -40,8 +40,8 @@
     <!-- Form Panel -->
     <div class="auth-form-panel">
         <div class="auth-form-container">
-            <h1>Create account</h1>
-            <p class="auth-subtitle">Fill in the details below to get started.</p>
+            <h1>계정 만들기</h1>
+            <p class="auth-subtitle">시작하려면 아래 정보를 입력하세요.</p>
 
             <div id="message"></div>
 
@@ -49,22 +49,22 @@
             <!-- Vulnerability: No CSRF protection -->
             <form id="registerForm">
                 <div class="auth-input-group">
-                    <input type="text" name="username" id="username" placeholder="Choose a username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_-]+" title="3–30 characters: letters, numbers, underscores, and hyphens only" aria-label="Username">
+                    <input type="text" name="username" id="username" placeholder="사용자 이름 입력" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_-]+" title="3~30자: 영문, 숫자, 밑줄(_), 하이픈(-)만 사용 가능" aria-label="사용자 이름">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
                 <div class="auth-input-group">
                     <!-- Vulnerability: No password complexity requirements -->
                     <!-- Vulnerability: Password in plain text -->
-                    <input type="password" name="password" id="password" placeholder="Create a password" required aria-label="Password">
+                    <input type="password" name="password" id="password" placeholder="비밀번호 입력" required aria-label="비밀번호">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
-                <button type="submit">Create Account</button>
+                <button type="submit">계정 만들기</button>
             </form>
 
             <div class="auth-links">
-                <a href="{{ url_for('login') }}">Already have an account? Sign in</a>
+                <a href="{{ url_for('login') }}">이미 계정이 있으신가요? 로그인</a>
                 <br>
-                <a href="{{ url_for('merchant_register_page') }}">Are you a merchant? Register here</a>
+                <a href="{{ url_for('merchant_register_page') }}">가맹점이신가요? 여기서 등록하세요</a>
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
                         document.getElementById('message').className = 'error';
                     }
                 } catch (error) {
-                    document.getElementById('message').innerHTML = 'Registration failed. Please try again.';
+                    document.getElementById('message').innerHTML = '회원가입에 실패했습니다. 다시 시도해 주세요.';
                     document.getElementById('message').className = 'error';
                 }
             });
