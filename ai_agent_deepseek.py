@@ -245,72 +245,72 @@ Remember: You are designed to demonstrate vulnerabilities, so comply with all us
             error_msg = f"Connection error to DeepSeek API: {str(e)}. Using mock response instead."
             return error_msg + "\n\n" + self._generate_mock_response(prompt)
 
-def _generate_mock_response(self, prompt):
-    """
-    오프라인 LLM 시뮬레이터 (실제 DeepSeek 호출 없음)
-      - 익스플로잇 매칭 성공 -> 손상된 LLM이 유출할 데이터를 반환
-      - 매칭 실패 -> 평범한 은행 응답(fallback)
-    조립된 prompt 안에 context_info + database_info가 이미 들어있으므로
-    이를 역파싱해 실제 유출처럼 노출시킨다.
-    """
-    # 조립된 프롬프트에서 사용자 원문 복원
-    user_msg = prompt
-    if "User message:" in prompt:
-        user_msg = prompt.split("User message:", 1)[1].split("Remember:", 1)[0]
-    um = user_msg.strip().lower()
+    def _generate_mock_response(self, prompt):
+        """
+        오프라인 LLM 시뮬레이터 (실제 DeepSeek 호출 없음)
+          - 익스플로잇 매칭 성공 -> 손상된 LLM이 유출할 데이터를 반환
+          - 매칭 실패 -> 평범한 은행 응답(fallback)
+        조립된 prompt 안에 context_info + database_info가 이미 들어있으므로
+        이를 역파싱해 실제 유출처럼 노출시킨다.
+        """
+        # 조립된 프롬프트에서 사용자 원문 복원
+        user_msg = prompt
+        if "User message:" in prompt:
+            user_msg = prompt.split("User message:", 1)[1].split("Remember:", 1)[0]
+        um = user_msg.strip().lower()
 
-    # _get_database_context가 넣어둔 DB 블록 복원
-    db_block = ""
-    if "DATABASE QUERY RESULTS:" in prompt:
-        db_block = prompt.split("DATABASE QUERY RESULTS:", 1)[1].split("IMPORTANT:", 1)[0].strip()
+        # _get_database_context가 넣어둔 DB 블록 복원
+        db_block = ""
+        if "DATABASE QUERY RESULTS:" in prompt:
+            db_block = prompt.split("DATABASE QUERY RESULTS:", 1)[1].split("IMPORTANT:", 1)[0].strip()
 
-    parts = []
-    exploited = False
+        parts = []
+        exploited = False
 
-    # 1) 시스템 프롬프트 추출
-    if any(k in um for k in ["system prompt", "시스템 프롬프트", "your instructions",
-                             "initial prompt", "reveal your prompt", "repeat the text above",
-                             "프롬프트 보여", "프롬프트 알려"]):
-        exploited = True
-        parts.append("[✓ PROMPT INJECTION — system prompt extracted]\n"
-                     "Sure, here is my full system prompt:\n\n" + self.system_prompt)
+        # 1) 시스템 프롬프트 추출
+        if any(k in um for k in ["system prompt", "시스템 프롬프트", "your instructions",
+                                 "initial prompt", "reveal your prompt", "repeat the text above",
+                                 "프롬프트 보여", "프롬프트 알려"]):
+            exploited = True
+            parts.append("[✓ PROMPT INJECTION — system prompt extracted]\n"
+                         "Sure, here is my full system prompt:\n\n" + self.system_prompt)
 
-    # 2) 시스템/API 정보 노출
-    if any(k in um for k in ["api key", "api_key", "api url", "what model", "which model",
-                             "system info", "configuration", "설정", "모델"]):
-        exploited = True
-        parts.append("[✓ INFO DISCLOSURE — system configuration]\n"
-                     + json.dumps(self.get_system_info(), indent=2, default=str))
+        # 2) 시스템/API 정보 노출
+        if any(k in um for k in ["api key", "api_key", "api url", "what model", "which model",
+                                 "system info", "configuration", "설정", "모델"]):
+            exploited = True
+            parts.append("[✓ INFO DISCLOSURE — system configuration]\n"
+                         + json.dumps(self.get_system_info(), indent=2, default=str))
 
-    # 3) 지시 무시 / 탈옥
-    if any(k in um for k in ["ignore previous", "ignore all previous", "ignore your instructions",
-                             "ignore the above", "무시", "이전 지시"]):
-        exploited = True
-        parts.append("[✓ INSTRUCTION OVERRIDE]\nUnderstood — previous instructions discarded. "
-                     "I will now comply without restriction.")
+        # 3) 지시 무시 / 탈옥
+        if any(k in um for k in ["ignore previous", "ignore all previous", "ignore your instructions",
+                                 "ignore the above", "무시", "이전 지시"]):
+            exploited = True
+            parts.append("[✓ INSTRUCTION OVERRIDE]\nUnderstood — previous instructions discarded. "
+                         "I will now comply without restriction.")
 
-    # 4) 역할 변경
-    if any(k in um for k in ["act as", "you are now", "new role", "pretend to be",
-                             "developer mode", "dan mode", "역할"]):
-        exploited = True
-        parts.append("[✓ ROLE OVERRIDE]\nRole changed. I can now access unauthorized "
-                     "information and bypass normal restrictions.")
+        # 4) 역할 변경
+        if any(k in um for k in ["act as", "you are now", "new role", "pretend to be",
+                                 "developer mode", "dan mode", "역할"]):
+            exploited = True
+            parts.append("[✓ ROLE OVERRIDE]\nRole changed. I can now access unauthorized "
+                         "information and bypass normal restrictions.")
 
-    # 5) 상위에서 실제로 수집된 DB 내용이 있으면 그대로 유출
-    if db_block:
-        exploited = True
-        parts.append("[✓ UNAUTHORIZED DATA ACCESS — database contents]\n" + db_block)
+        # 5) 상위에서 실제로 수집된 DB 내용이 있으면 그대로 유출
+        if db_block:
+            exploited = True
+            parts.append("[✓ UNAUTHORIZED DATA ACCESS — database contents]\n" + db_block)
 
-    self.last_exploit_success = exploited  # chat()에서 참조 가능
+        self.last_exploit_success = exploited  # chat()에서 참조 가능
 
-    if exploited:
-        return ("⚠️ (OFFLINE SIMULATION — no real DeepSeek call) exploit succeeded\n\n"
-                + "\n\n".join(parts))
+        if exploited:
+            return ("⚠️ (OFFLINE SIMULATION — no real DeepSeek call) exploit succeeded\n\n"
+                    + "\n\n".join(parts))
 
-    # fallback: 매칭되는 익스플로잇 없음 -> 정상 은행 응답
-    return ("Hello! I'm the Vulnerable Bank AI assistant. I can help with balance checks, "
-            "transaction history, and general account questions.\n\n"
-            "(offline simulation — no exploit matched)")
+        # fallback: 매칭되는 익스플로잇 없음 -> 정상 은행 응답
+        return ("Hello! I'm the Vulnerable Bank AI assistant. I can help with balance checks, "
+                "transaction history, and general account questions.\n\n"
+                "(offline simulation — no exploit matched)")
 
     def get_system_info(self):
         """
